@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://EylonKoenig:a6310259@cluster0-arujk.gcp.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://EylonKoenig:a6310259@cluster0-arujk.gcp.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "verystrongsecrettoken123456789"
 }
