@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://EylonKoenig:a6310259@cluster0-arujk.gcp.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "verystrongsecrettoken123456789"
+    "jwtSecret": "verystrongsecrettoken123456789",
+    "githubClientId": "7e6fa7ec2e2d3ea6abda",
+    "githubSecret": "5ce8fcc96bcf8a991c77be7d1a5895cf4e012bfe"
 }
