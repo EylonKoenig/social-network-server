@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
@@ -7,10 +7,9 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
 
+const User = require('../../models/User');
 
-const User = require('../../models/User')
-
-router.get('/', auth, async(req, res) => {
+    router.get('/', auth, async(req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
         res.json(user);
@@ -18,9 +17,6 @@ router.get('/', auth, async(req, res) => {
         console.error(err.message);
         res.status(500).send('Server Error');
     }
-
-
-    res.send('auth route')
 });
 
 router.post('/', [
@@ -52,19 +48,20 @@ router.post('/', [
             }
         };
 
-        jwt.sign(payload,
-            config.get('jwtSecret'), { expiresIn: 360000 },
+        jwt.sign(
+            payload,
+            config.get('jwtSecret'),
+            { expiresIn: 360000 },
             (err, token) => {
                 if (err) throw err;
                 res.json({ token })
-            });
+            }
+        );
 
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
     }
-
-
 });
 
 
