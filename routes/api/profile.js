@@ -7,6 +7,7 @@ const config = require('config');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 const profileBuilder = require('../../utils/profilebuilder');
 
 
@@ -46,7 +47,7 @@ router.post('/', [
             if (profile) {
                 profile = await Profile.findOneAndUpdate({ user: userId }, { $set: profileFields }, { new: true });
                 return res.json(profile)
-            };
+            }
             profile = new Profile(profileFields);
             await profile.save();
             res.json(profile);
@@ -88,8 +89,9 @@ router.get('/user/:user_id', async(req, res) => {
 
 router.delete('/', auth, async(req, res) => {
     try {
+        await Post.deleteMany({user:req.user.id});
         await Profile.findOneAndRemove({ user: req.user.id });
-        // await User.findOneAndRemove({ _id: req.user.id });
+        await User.findOneAndRemove({ _id: req.user.id });
         res.json({ msg: 'User deleted' });
     } catch (error) {
         console.log(error.message);
@@ -126,7 +128,7 @@ router.put('/experience', [auth, [
         to,
         current,
         description
-    }
+    };
     try {
         const profile = await Profile.findOne({ user: req.user.id });
         profile.experience.unshift(newExp);
